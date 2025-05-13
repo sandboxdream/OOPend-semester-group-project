@@ -1,0 +1,12 @@
+LINE: 9: The parameters of Rectangle are too large or illegal
+Shape1 is not a recognized shape
+Shape2 is not a recognized shape
+Shape3 is not a recognized shape
+Circle3 is not a recognized shape
+Shape4 is not a recognized shape
+Triangle4 is not a recognized shape
+LINE: 50: The parameters of Triangle are too large or illegal
+Shape5 is not a recognized shape
+Circle: 24      Triangle: 10    
+Rectangle: 8    Square: 7       
+Total Area is 70662.16694115412
