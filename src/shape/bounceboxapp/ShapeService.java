@@ -30,18 +30,165 @@ import java.util.ArrayList;
 
 public class ShapeService {
 
-    ArrayList<Shape> parseFile(String filename) {
-        ArrayList<Shape> shapes = new ArrayList<>();
+    public static HashMap<String, Integer> argsMap = new HashMap<>();
 
-        return null;
+    // The parseByString function used to store each derived class is convenient
+    // for direct invocation
+    public static HashMap<String, BiFunction<String[], String[], shape.bounceboxframework.Shape>> functionMap = new HashMap<>();
+
+    // public BounceBox box = new BounceBox(bounceBoxWidth, bounceBoxHeight);
+
+    private static ShapeService instance;
+
+    private ShapeService() {
     }
 
-    HashMap<String, Shape> countByType(String filename) {
-        HashMap<String, Shape> shapes = new HashMap<>();
+    // Output a 16-bit left-aligned string. If it is insufficient, add Spaces
+    // private static void printWith16(String str) {
+    // String formattedText = String.format("%-16s", str);
+    // print(formattedText);
+    // }
+
+    // // Output a red string (but still black in the file)
+    // private static void printWithColor(String str) {
+    // String formattedText = "\u001B[31m" + str + "\u001B[0m";
+    // System.out.print(formattedText);
+    // try {
+    // if (fileWriter != null) {
+    // fileWriter.write(str);
+    // fileWriter.flush();
+    // }
+    // } catch (IOException e) {
+    // System.err.println("File writing failed: " + e.getMessage());
+    // }
+    // }
+
+    // private static void print(String str) {
+    // System.out.print(str);
+    // try {
+    // if (fileWriter != null) {
+    // fileWriter.write(str);
+    // fileWriter.flush();
+    // }
+    // } catch (IOException e) {
+    // System.err.println("File writing failed: " + e.getMessage());
+    // }
+    // }
+
+    // private static void println(String str) {
+    // System.out.println(str);
+
+    // try {
+    // if (fileWriter != null) {
+    // fileWriter.write(str + "\r\n");
+    // fileWriter.flush();
+    // }
+    // } catch (IOException e) {
+    // System.err.println("File writing failed: " + e.getMessage());
+    // }
+    // }
+
+    public static ShapeService getInstance() {
+        if (instance == null) {
+            instance = new ShapeService(); // 多线程下可能重复创建
+        }
+        return instance;
+    }
+
+    public void preWork() {
+        // The number of constructor parameters required to initialize each derived
+        // class
+        argsMap.put("Circle", 3);
+        argsMap.put("Square", 3);
+        argsMap.put("Rectangle", 4);
+        argsMap.put("Triangle", 4);
+
+        // Initialize the parseByString function of each derived class
+        functionMap.put("Circle", (constructArgs, otherArgs) -> {
+            return Circle.parseByString(constructArgs, otherArgs);
+        });
+        functionMap.put("Rectangle", (constructArgs, otherArgs) -> {
+            return Rectangle.parseByString(constructArgs, otherArgs);
+        });
+        functionMap.put("Square", (constructArgs, otherArgs) -> {
+            return Square.parseByString(constructArgs, otherArgs);
+        });
+        functionMap.put("Triangle", (constructArgs, otherArgs) -> {
+            return Triangle.parseByString(constructArgs, otherArgs);
+        });
+    }
+
+    public ArrayList<Shape> parseFile(String filename) {
+        ArrayList<Shape> shapes = new ArrayList<>();
+
+        try {
+            FileInputStream flieIn = new FileInputStream(filename);
+
+            Scanner scan = new Scanner(flieIn);
+            int currentLineNumber = 0;
+            while (scan.hasNextLine()) {
+                currentLineNumber++;
+                String line = scan.nextLine();
+                String args[] = line.split("\\s+");
+
+                if ((args.length <= 0) || (args[0].isEmpty()))
+                    continue;
+
+                // Find the derived class name for this time
+                String shapeType = args[0];
+                if (argsMap.get(shapeType) == null) {
+                    // printWithColor(shapeType + " is not a recognized shape");
+                    // System.out.println();
+                    // println("");
+                    continue;
+                }
+
+                // Find the number of parameters of its constructor
+                int constructArgsLength = argsMap.get(shapeType);
+
+                // Divide args into two character arrays: the string of the constructor and
+                // the string for setting the speed or color
+                String[] constructArgs = Arrays.copyOfRange(
+                        args, 1, Math.min(1 + constructArgsLength, args.length));
+                String[] otherArgs = Arrays.copyOfRange(args, 1 + constructArgs.length, args.length);
+
+                // Find the corresponding function to be called
+                BiFunction<String[], String[], shape.bounceboxframework.Shape> func = functionMap.get(shapeType);
+                shape.bounceboxframework.Shape one = func.apply(
+                        constructArgs, otherArgs); // Call the function to obtain the instance
+
+                // If it is null, it indicates that the data format is illegal
+                if (one == null) {
+                    // printWithColor("LINE: " + currentLineNumber + ": The parameters of " +
+                    // shapeType + " are too large or illegal");
+                    // println("");
+                    continue;
+                }
+
+                shapes.add(one);
+
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
         return shapes;
     }
 
-    double totalArea(ArrayList<Shape> shapes) {
+    public HashMap<String, Integer> countByType(ArrayList<Shape> shapes) {
+        HashMap<String, Integer> shapesCount = new HashMap<>();
+        for (Shape one : shapes) {
+            String className = one.getClass().getSimpleName();
+            if (shapesCount.containsKey(className)) {
+                shapesCount.put(className, shapesCount.get(className) + 1);
+            } else {
+                shapesCount.put(className, 1);
+            }
+        }
+        return shapesCount;
+    }
+
+    public double totalArea(ArrayList<Shape> shapes) {
         double totalArea = 0;
         for (Shape shape : shapes) {
             totalArea += shape.getMass();
@@ -49,7 +196,12 @@ public class ShapeService {
         return totalArea;
     }
 
-    void displayShapes(ArrayList<Shape> shapes) {
+    public void displayShapes(BounceBox box, ArrayList<Shape> shapes) {
+
+        for (Shape one : shapes) {
+            box.addShape(one);
+        }
+        box.start();
         // for (Shape shape : shapes) {
         // System.out.println(shape);
         // }

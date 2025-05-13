@@ -3,6 +3,7 @@ package shape.bouncebox;
 import java.awt.Graphics2D;
 
 import shape.bounceboxapp.Main;
+import shape.bounceboxapp.ShapeService;
 import shape.bounceboxframework.Shape;
 
 /**
@@ -40,7 +41,7 @@ public class Rectangle extends Shape {
     // class,
     // and "otherArgs" stores the parameters for setting the speed or color
     public static Rectangle parseByString(String[] constructArgs, String[] otherArgs) {
-        if (constructArgs.length != Main.argsMap.get("Rectangle"))
+        if (constructArgs.length != ShapeService.argsMap.get("Rectangle"))
             return null;
         try {
             int x = Integer.parseInt(constructArgs[0]);

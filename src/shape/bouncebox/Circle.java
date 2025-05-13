@@ -8,6 +8,7 @@ package shape.bouncebox;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import shape.bounceboxapp.Main;
+import shape.bounceboxapp.ShapeService;
 import shape.bounceboxframework.Shape;
 
 /**
@@ -48,7 +49,7 @@ public class Circle extends Shape {
     // class,
     // and "otherArgs" stores the parameters for setting the speed or color
     public static Circle parseByString(String[] constructArgs, String[] otherArgs) {
-        if (constructArgs.length != Main.argsMap.get("Circle"))
+        if (constructArgs.length != ShapeService.argsMap.get("Circle"))
             return null;
         try {
             int x = Integer.parseInt(constructArgs[0]);
