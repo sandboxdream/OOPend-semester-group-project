@@ -41,30 +41,6 @@ public class Main {
    * @param args the command line arguments
    */
 
-  /*
-   * The coupling degree is low. If you want to add a new shape, just write the
-   * corresponding
-   * parseByString function and initialize it in the main function. For example:
-   * argsMap.put("Circle", 3);
-   * functionMap.put("Circle", (constructArgs, otherArgs) -> {
-   * return Circle.parseByString(constructArgs, otherArgs);
-   * });
-   * In this way, the parsing of parameters can be achieved
-   * Decouple from the Handle function
-   *
-   * The handle function has been added to the Shape class to extract the
-   * content related to setting the color or speed. In this way, if there are
-   * any other Settings you want to make later, you can directly modify them in
-   * handle.
-   *
-   */
-
-  // It is used to record the number of constructor parameters required for each
-  // derived class
-
-  // public static ArrayList<shape.bounceboxframework.Shape> shapes = new
-  // ArrayList<>();
-
   public static String fileName = "src/shape/textfiles/practical4.txt";
 
   public static String fileoutName = "src/shape/textfiles/shapesArea.txt";
@@ -73,17 +49,6 @@ public class Main {
 
   public static int bounceBoxWidth = 700;
   public static int bounceBoxHeight = 500;
-
-  private static FileWriter fileWriter;
-
-  // Initialize the file writer
-  static {
-    try {
-      fileWriter = new FileWriter(fileoutName); // 输出到textfiles/shapesArea.txt
-    } catch (IOException e) {
-      System.err.println("Unable to create the output file: " + e.getMessage());
-    }
-  }
 
   public static void main(String[] args) throws FileNotFoundException {
     ShapeService.getInstance().preWork();

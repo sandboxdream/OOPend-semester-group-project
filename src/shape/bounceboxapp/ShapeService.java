@@ -30,6 +30,26 @@ import java.util.ArrayList;
 
 public class ShapeService {
 
+    /*
+     * The following annotation content is transplanted from the Main function, but
+     * it does not affect understanding.
+     * The coupling degree is low. If you want to add a new shape, just write the
+     * corresponding
+     * parseByString function and initialize it in the main function. For example:
+     * argsMap.put("Circle", 3);
+     * functionMap.put("Circle", (constructArgs, otherArgs) -> {
+     * return Circle.parseByString(constructArgs, otherArgs);
+     * });
+     * In this way, the parsing of parameters can be achieved
+     * Decouple from the Handle function
+     *
+     * The handle function has been added to the Shape class to extract the
+     * content related to setting the color or speed. In this way, if there are
+     * any other Settings you want to make later, you can directly modify them in
+     * handle.
+     *
+     */
+
     public static HashMap<String, Integer> argsMap = new HashMap<>();
 
     // The parseByString function used to store each derived class is convenient
