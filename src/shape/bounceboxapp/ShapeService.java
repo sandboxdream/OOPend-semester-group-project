@@ -45,28 +45,6 @@ public class ShapeService {
     private ShapeService() {
     }
 
-    public void printOutputString() {
-        System.out.println(outputString.toString());
-    }
-
-    private void printWith16(String str) {
-        String formattedText = String.format("%-16s", str);
-        print(formattedText);
-    }
-
-    private void printWithColor(String str) {
-        String formattedText = "\u001B[31m" + str + "\u001B[0m";
-        outputString.append(formattedText);
-    }
-
-    private void print(String str) {
-        outputString.append(str);
-    }
-
-    void println(String str) {
-        outputString.append(str + "\r\n");
-    }
-
     public static ShapeService getInstance() {
         if (instance == null) {
             instance = new ShapeService();
@@ -117,8 +95,6 @@ public class ShapeService {
                 String shapeType = args[0];
                 if (argsMap.get(shapeType) == null) {
                     printWithColor(shapeType + " is not a recognized shape" + "\r\n");
-                    // System.out.println();
-                    // println("");
                     continue;
                 }
 
@@ -140,7 +116,6 @@ public class ShapeService {
                 if (one == null) {
                     printWithColor("LINE: " + currentLineNumber + ": The parameters of " +
                             shapeType + " are too large or illegal\r\n");
-                    // println("");
                     continue;
                 }
 
@@ -181,6 +156,45 @@ public class ShapeService {
             box.addShape(one);
         }
         box.start();
+
+        HashMap<String, Integer> cntMap = countByType(shapes);
+        for (Map.Entry<String, Integer> entry : cntMap.entrySet()) {
+            println(entry.getKey() + ": " + entry.getValue());
+        }
+
+        print("Total Area is ");
+        print(Double.toString(totalArea(shapes)));
+        println("");
+
     }
 
+    private void printWithColor(String str) {
+        String formattedText = "\u001B[31m" + str + "\u001B[0m";
+        outputString.append(formattedText);
+    }
+
+    private void print(String str) {
+        outputString.append(str);
+    }
+
+    private void println(String str) {
+        outputString.append(str + "\r\n");
+    }
+
+    public void printOutputString() {
+        System.out.println(outputString.toString());
+    }
+
+    public void writeToFile(String filename) {
+        try {
+            FileWriter writer = new FileWriter(filename);
+            String str = outputString.toString();
+            str = str.replace("\u001B[31m", "");
+            str = str.replace("\u001B[0m", "");
+            writer.write(str);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
