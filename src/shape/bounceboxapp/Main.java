@@ -69,11 +69,7 @@ public class Main {
 
   public static String fileoutName = "src/shape/textfiles/shapesArea.txt";
 
-  // Used to store the total area
-  public static double areaSum = 0;
-
   // Record the current number of rows when parsing
-  private static int currentLineNumber = 0;
 
   public static int bounceBoxWidth = 700;
   public static int bounceBoxHeight = 500;
@@ -90,12 +86,11 @@ public class Main {
   }
 
   public static void main(String[] args) throws FileNotFoundException {
-    // preWork();
     ShapeService.getInstance().preWork();
     ArrayList<shape.bounceboxframework.Shape> shapes = ShapeService.getInstance().parseFile(fileName);
-    BounceBox box = new BounceBox(bounceBoxWidth, bounceBoxHeight);
-    ShapeService.getInstance().displayShapes(box, shapes);
-    // simpleDemo();
+    // BounceBox box = new BounceBox(bounceBoxWidth, bounceBoxHeight);
+    ShapeService.getInstance().displayShapes(shapes);
+    // ShapeService.getInstance().printOutputString();
   }
 
   // It is used to process each row of data
@@ -214,25 +209,25 @@ public class Main {
     }
   }
 
-  // public static void simpleDemo() {
-  // BounceBox box = new BounceBox(bounceBoxWidth, bounceBoxHeight);
-  // parseLine(box);
-  // box.start();
+  public static void simpleDemo() {
+    // BounceBox box = new BounceBox(bounceBoxWidth, bounceBoxHeight);
+    // parseLine(box);
+    // box.start();
 
-  // int current = 0;
-  // for (Map.Entry<String, Integer> entry : cntMap.entrySet()) {
-  // printWith16(entry.getKey() + ": " + entry.getValue());
-  // current++;
-  // if (current % 2 == 0) {
-  // println("");
-  // }
-  // }
-  // if (current % 2 == 1) {
-  // println("");
-  // }
+    // int current = 0;
+    // for (Map.Entry<String, Integer> entry : cntMap.entrySet()) {
+    // printWith16(entry.getKey() + ": " + entry.getValue());
+    // current++;
+    // if (current % 2 == 0) {
+    // println("");
+    // }
+    // }
+    // if (current % 2 == 1) {
+    // println("");
+    // }
 
-  // print("Total Area is ");
-  // print(Double.toString(areaSum));
-  // println("");
-  // }
+    // print("Total Area is ");
+    // print(Double.toString(areaSum));
+    // println("");
+  }
 }

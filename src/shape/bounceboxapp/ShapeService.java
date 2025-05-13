@@ -36,61 +36,40 @@ public class ShapeService {
     // for direct invocation
     public static HashMap<String, BiFunction<String[], String[], shape.bounceboxframework.Shape>> functionMap = new HashMap<>();
 
-    // public BounceBox box = new BounceBox(bounceBoxWidth, bounceBoxHeight);
+    public BounceBox box = new BounceBox(700, 500);
 
     private static ShapeService instance;
+
+    private StringBuilder outputString = new StringBuilder();
 
     private ShapeService() {
     }
 
-    // Output a 16-bit left-aligned string. If it is insufficient, add Spaces
-    // private static void printWith16(String str) {
-    // String formattedText = String.format("%-16s", str);
-    // print(formattedText);
-    // }
+    public void printOutputString() {
+        System.out.println(outputString.toString());
+    }
 
-    // // Output a red string (but still black in the file)
-    // private static void printWithColor(String str) {
-    // String formattedText = "\u001B[31m" + str + "\u001B[0m";
-    // System.out.print(formattedText);
-    // try {
-    // if (fileWriter != null) {
-    // fileWriter.write(str);
-    // fileWriter.flush();
-    // }
-    // } catch (IOException e) {
-    // System.err.println("File writing failed: " + e.getMessage());
-    // }
-    // }
+    private void printWith16(String str) {
+        String formattedText = String.format("%-16s", str);
+        print(formattedText);
+    }
 
-    // private static void print(String str) {
-    // System.out.print(str);
-    // try {
-    // if (fileWriter != null) {
-    // fileWriter.write(str);
-    // fileWriter.flush();
-    // }
-    // } catch (IOException e) {
-    // System.err.println("File writing failed: " + e.getMessage());
-    // }
-    // }
+    private void printWithColor(String str) {
+        String formattedText = "\u001B[31m" + str + "\u001B[0m";
+        outputString.append(formattedText);
+    }
 
-    // private static void println(String str) {
-    // System.out.println(str);
+    private void print(String str) {
+        outputString.append(str);
+    }
 
-    // try {
-    // if (fileWriter != null) {
-    // fileWriter.write(str + "\r\n");
-    // fileWriter.flush();
-    // }
-    // } catch (IOException e) {
-    // System.err.println("File writing failed: " + e.getMessage());
-    // }
-    // }
+    void println(String str) {
+        outputString.append(str + "\r\n");
+    }
 
     public static ShapeService getInstance() {
         if (instance == null) {
-            instance = new ShapeService(); // 多线程下可能重复创建
+            instance = new ShapeService();
         }
         return instance;
     }
@@ -137,7 +116,7 @@ public class ShapeService {
                 // Find the derived class name for this time
                 String shapeType = args[0];
                 if (argsMap.get(shapeType) == null) {
-                    // printWithColor(shapeType + " is not a recognized shape");
+                    printWithColor(shapeType + " is not a recognized shape" + "\r\n");
                     // System.out.println();
                     // println("");
                     continue;
@@ -159,8 +138,8 @@ public class ShapeService {
 
                 // If it is null, it indicates that the data format is illegal
                 if (one == null) {
-                    // printWithColor("LINE: " + currentLineNumber + ": The parameters of " +
-                    // shapeType + " are too large or illegal");
+                    printWithColor("LINE: " + currentLineNumber + ": The parameters of " +
+                            shapeType + " are too large or illegal\r\n");
                     // println("");
                     continue;
                 }
@@ -196,15 +175,12 @@ public class ShapeService {
         return totalArea;
     }
 
-    public void displayShapes(BounceBox box, ArrayList<Shape> shapes) {
+    public void displayShapes(ArrayList<Shape> shapes) {
 
         for (Shape one : shapes) {
             box.addShape(one);
         }
         box.start();
-        // for (Shape shape : shapes) {
-        // System.out.println(shape);
-        // }
     }
 
 }
