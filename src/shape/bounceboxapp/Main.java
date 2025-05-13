@@ -92,6 +92,12 @@ public class Main {
 
   public static void main(String[] args) throws FileNotFoundException {
 
+    preWork();
+
+    simpleDemo();
+  }
+
+  public static void preWork() {
     // The number of constructor parameters required to initialize each derived
     // class
     argsMap.put("Circle", 3);
@@ -112,8 +118,6 @@ public class Main {
     functionMap.put("Triangle", (constructArgs, otherArgs) -> {
       return Triangle.parseByString(constructArgs, otherArgs);
     });
-
-    simpleDemo();
   }
 
   // It is used to process each row of data
@@ -180,7 +184,6 @@ public class Main {
         Handle(box, args);
       }
     } catch (FileNotFoundException e) {
-      // print("11111");
       e.printStackTrace();
     }
   }
