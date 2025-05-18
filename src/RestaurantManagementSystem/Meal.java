@@ -22,6 +22,11 @@ public class Meal implements Priceable {
     public void addIngredient(Ingredient ingredient) {
         ingredients.add(ingredient);
     }
+    
+    // 添加兼容旧代码的方法别名
+    public void addIngerdient(Ingredient ingredient) {
+        addIngredient(ingredient);
+    }
 
     public String getName() { return name; }
 
