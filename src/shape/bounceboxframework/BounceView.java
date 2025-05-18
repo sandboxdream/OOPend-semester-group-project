@@ -8,6 +8,10 @@ package shape.bounceboxframework;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -40,3 +44,4 @@ public class BounceView implements Observer {
         panel.addDrawable(d);
     }
 }
+

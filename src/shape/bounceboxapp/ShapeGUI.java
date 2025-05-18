@@ -16,7 +16,7 @@ public class ShapeGUI {
     public ShapeGUI() {
         // Create the main frame
         mainFrame = new JFrame("Shape GUI");
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Changed from EXIT_ON_CLOSE to DISPOSE_ON_CLOSE
         mainFrame.setSize(300, 100);
         mainFrame.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 20));
 
