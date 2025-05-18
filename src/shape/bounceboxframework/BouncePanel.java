@@ -43,6 +43,6 @@ public class BouncePanel extends JPanel {
 
     public void addDrawable(Drawable d) {
         drawshapes.add(d);
-
+        repaint();
     }
 }
