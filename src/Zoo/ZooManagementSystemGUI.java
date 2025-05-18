@@ -28,7 +28,7 @@ public class ZooManagementSystemGUI extends JFrame {
     public ZooManagementSystemGUI() {
         // Set up the frame
         super("Zoo Management System");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Changed from EXIT_ON_CLOSE to DISPOSE_ON_CLOSE
         setSize(800, 600);
         setLocationRelativeTo(null);
         

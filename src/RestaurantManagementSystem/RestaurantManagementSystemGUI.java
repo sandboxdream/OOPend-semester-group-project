@@ -32,7 +32,7 @@ public class RestaurantManagementSystemGUI extends JFrame {
     public RestaurantManagementSystemGUI() {
         // Set up the frame
         super("Restaurant Management System");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Changed from EXIT_ON_CLOSE to DISPOSE_ON_CLOSE
         setSize(800, 600);
         setLocationRelativeTo(null);
 
