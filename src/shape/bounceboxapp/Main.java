@@ -28,7 +28,6 @@ import shape.bouncebox.Circle;
 import shape.bouncebox.Rectangle;
 import shape.bouncebox.Square;
 import shape.bouncebox.Triangle;
-import shape.textfiles.*;
 
 /**
  *

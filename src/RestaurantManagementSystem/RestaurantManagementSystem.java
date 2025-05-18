@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class RestaurantManagementSystem1 {
+public class RestaurantManagementSystem {
     private static final RestaurantService service = new RestaurantService();
     private static final Scanner scanner = new Scanner(System.in);
 
