@@ -859,13 +859,14 @@ public class RestaurantManagementSystemGUI extends JFrame {
 
                 String bill = billing.generateBill(customerName);
                 if (MainGUI.isStartFromMainGUI == true) {
-
                     try {
-                        BankingTaskListGUI.taskManager.deposit(MainGUI.UserID, billing.calculateBill());
+                        if (BankingTaskListGUI.taskManager.AccountExist(customerName) == false) {
+                            BankingTaskListGUI.taskManager.createAccount(customerName, 10000.0, 10.0);
+                        }
+                        BankingTaskListGUI.taskManager.withdraw(customerName, billing.calculateBill());
                     } catch (Exception ex) {
                         System.out.println("ERROR" + ex.getMessage());
                     }
-
                 }
                 textArea.setText(bill);
 

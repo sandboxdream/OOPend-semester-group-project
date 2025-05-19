@@ -110,7 +110,9 @@ public class MainGUI {
         isStartFromMainGUI = true;
         try {
 
-            BankingTaskListGUI.taskManager.createAccount(UserID, 100.0, 10.0);
+            BankingTaskListGUI.taskManager.createAccount("Southern-Zone Zoo", 100.0, 10.0);
+            BankingTaskListGUI.taskManager.createAccount("Northern-Zone Zoo", 100.0, 10.0);
+
         } catch (Exception ex) {
             System.out.print("ERROR: " + ex.getMessage());
         }

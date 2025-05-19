@@ -400,7 +400,7 @@ public class ZooManagementSystemGUI extends JFrame {
                 Logistics logistics = new Logistics(vehicle, fuel, caretakers);
 
                 if (MainGUI.isStartFromMainGUI == true)
-                    BankingTaskListGUI.taskManager.withdraw(MainGUI.UserID, logistics.getTotalCost());
+                    BankingTaskListGUI.taskManager.deposit(sourceZoo.getName(), logistics.getTotalCost());
 
                 // Move the animal
                 sourceZoo.moveAnimal(animalName, destZoo, logistics);

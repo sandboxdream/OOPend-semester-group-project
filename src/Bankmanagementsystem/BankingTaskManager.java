@@ -19,6 +19,10 @@ public class BankingTaskManager {
         taskManager = new TaskManager();
     }
 
+    public boolean AccountExist(String accountNumber) {
+        return accounts.containsKey(accountNumber);
+    }
+
     public void createAccount(String accountNumber, double balance, double annualInterestRate) throws Exception {
         if (!accounts.containsKey(accountNumber)) {
             accounts.put(accountNumber, new BankAccount(balance, annualInterestRate));
