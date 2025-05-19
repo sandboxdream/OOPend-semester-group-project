@@ -13,8 +13,8 @@ import java.awt.event.*;
  */
 public class ZooManagementSystemGUI extends JFrame {
     // Zoo instances
-    private Zoo southernZone;
-    private Zoo northernZone;
+    public static Zoo southernZone;
+    public static Zoo northernZone;
 
     // Main panels
     private JPanel mainPanel;
