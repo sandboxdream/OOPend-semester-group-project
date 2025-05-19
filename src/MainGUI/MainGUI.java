@@ -3,6 +3,8 @@ package MainGUI;
 import java.awt.*;
 import javax.swing.*;
 
+import Bankmanagementsystem.BankingTaskListGUI;
+
 public class MainGUI {
     public static void main(String[] args) {
         // Create the main frame
@@ -36,10 +38,11 @@ public class MainGUI {
         bankingButton.setPreferredSize(buttonSize);
 
         // Add action listeners to buttons
-        zooButton.addActionListener(e -> Zoo.ZooManagementSystemGUI.main(new String[]{}));
-        shapeButton.addActionListener(e -> shape.bounceboxapp.ShapeGUI.main(new String[]{}));
-        restaurantButton.addActionListener(e -> RestaurantManagementSystem.RestaurantManagementSystemGUI.main(new String[]{}));
-        bankingButton.addActionListener(e -> Bankmanagementsystem.BankingTaskListGUI.main(new String[]{}));
+        zooButton.addActionListener(e -> Zoo.ZooManagementSystemGUI.main(new String[] {}));
+        shapeButton.addActionListener(e -> shape.bounceboxapp.ShapeGUI.main(new String[] {}));
+        restaurantButton
+                .addActionListener(e -> RestaurantManagementSystem.RestaurantManagementSystemGUI.main(new String[] {}));
+        bankingButton.addActionListener(e -> Bankmanagementsystem.BankingTaskListGUI.main(new String[] {}));
 
         // Add buttons to the button panel
         buttonPanel.add(zooButton);
@@ -50,7 +53,6 @@ public class MainGUI {
         // Add the button panel to the main panel
         mainPanel.add(buttonPanel, BorderLayout.CENTER);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Changed from EXIT_ON_CLOSE to DISPOSE_ON_CLOSE
-
 
         // Create status bar at bottom
         JPanel statusPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
@@ -73,18 +75,18 @@ public class MainGUI {
         // Add Help menu
         JMenu helpMenu = new JMenu("Help");
         menuBar.add(helpMenu);
-        
+
         JMenuItem aboutItem = new JMenuItem("About");
         aboutItem.addActionListener(e -> {
-            JOptionPane.showMessageDialog(frame, 
+            JOptionPane.showMessageDialog(frame,
                     "Integrated Management System v1.0\n" +
-                    "Object-Oriented Programming Final Project\n" +
-                    "Contains four subsystems:\n" +
-                    "1. Zoo Management System\n" +
-                    "2. Shape GUI\n" +
-                    "3. Restaurant Management System\n" +
-                    "4. Banking Task Management System",
-                    "About", 
+                            "Object-Oriented Programming Final Project\n" +
+                            "Contains four subsystems:\n" +
+                            "1. Zoo Management System\n" +
+                            "2. Shape GUI\n" +
+                            "3. Restaurant Management System\n" +
+                            "4. Banking Task Management System",
+                    "About",
                     JOptionPane.INFORMATION_MESSAGE);
         });
         helpMenu.add(aboutItem);
@@ -100,5 +102,13 @@ public class MainGUI {
 
         // Set the frame to be visible
         frame.setVisible(true);
+
+        try {
+
+            BankingTaskListGUI.taskManager.createAccount("10086", 100.0, 10.0);
+        } catch (Exception ex) {
+            System.out.print("ERROR: " + ex.getMessage());
+        }
+
     }
 }

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class BankingTaskListGUI {
     // Main components
     private JFrame frame;
-    private BankingTaskManager taskManager;
+    public static BankingTaskManager taskManager = new BankingTaskManager();
 
     // Account Creation Panel Components
     private JTextField accountNumberField;
@@ -38,7 +38,7 @@ public class BankingTaskListGUI {
 
     public BankingTaskListGUI() {
         // Initialize task manager
-        taskManager = new BankingTaskManager();
+        // taskManager = new BankingTaskManager();
 
         // Initialize currency formatter
         currencyFormat = new DecimalFormat("RMB #,##0.00");
@@ -91,6 +91,16 @@ public class BankingTaskListGUI {
         panel.add(createAccountButton);
 
         return panel;
+    }
+
+    public void createRootUserAccount() {
+        // String accountNumber = accountNumberField.getText().trim();
+        // double initialBalance =
+        // Double.parseDouble(initialBalanceField.getText().trim());
+        // double interestRate = Double.parseDouble(interestRateField.getText().trim())
+        // / 100;
+        // taskManager.createAccount(accountNumber, initialBalance, interestRate);
+
     }
 
     private void createAccount() {

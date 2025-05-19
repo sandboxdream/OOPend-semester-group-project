@@ -19,13 +19,14 @@ public class BankingTaskManager {
         taskManager = new TaskManager();
     }
 
-    public void createAccount(String accountNumber, double balance, double annualInterestRate) {
+    public void createAccount(String accountNumber, double balance, double annualInterestRate) throws Exception {
         if (!accounts.containsKey(accountNumber)) {
             accounts.put(accountNumber, new BankAccount(balance, annualInterestRate));
             taskManager.addTask("Created new account: " + accountNumber);
             System.out.println("Account created successfully: " + accountNumber);
         } else {
-            System.out.println("Account number already exists.");
+            throw new Exception("Account number already exists.");
+            // System.out.println("Account number already exists.");
         }
     }
 

@@ -47,8 +47,6 @@ public class BankAccount {
                 withdrawalsCount++;
                 System.out.println("Withdrawn RMB " + amount + ". New balance: RMB " +
                         balance);
-                // throw new Exception("Withdrawn RMB " + amount + ". New balance: RMB " +
-                // balance);
             } else {
                 // System.out.println("Insufficient funds for withdrawal.");
                 throw new Exception("Insufficient funds for withdrawal.");
