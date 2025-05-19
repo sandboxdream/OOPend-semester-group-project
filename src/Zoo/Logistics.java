@@ -6,6 +6,7 @@ package Zoo;
 
 /**
  * Logistics Class - Manages transportation details for animal movements
+ * 
  * @author ashongtical
  */
 public class Logistics {
@@ -18,13 +19,16 @@ public class Logistics {
         this.fuel = fuel;
         this.caretakers = caretakers;
     }
+
     // Accessor
     public void setVehicle(Item vehicle) {
         this.vehicle = vehicle;
     }
+
     public void setFuel(Item fuel) {
         this.fuel = fuel;
     }
+
     public void setCaretakers(String[] caretakers) {
         this.caretakers = caretakers;
     }
@@ -33,11 +37,17 @@ public class Logistics {
     public Item getVehicle() {
         return vehicle;
     }
+
     public Item getFuel() {
         return fuel;
     }
+
     public String[] getCaretakers() {
         return caretakers;
+    }
+
+    public double getTotalCost() {
+        return vehicle.getPrice() + fuel.getPrice();
     }
 
     public void printDetails() {
@@ -53,5 +63,5 @@ public class Logistics {
         System.out.println("\nTotal Cost: " + totalCost);
         System.out.println();
     }
-    
+
 }
