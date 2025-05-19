@@ -1,6 +1,10 @@
 package Zoo;
 
 import javax.swing.*;
+
+import Bankmanagementsystem.BankingTaskListGUI;
+import MainGUI.MainGUI;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -394,6 +398,8 @@ public class ZooManagementSystemGUI extends JFrame {
                 fuel.setPrice(fuelCost);
 
                 Logistics logistics = new Logistics(vehicle, fuel, caretakers);
+
+                BankingTaskListGUI.taskManager.withdraw(MainGUI.UserID, logistics.getTotalCost());
 
                 // Move the animal
                 sourceZoo.moveAnimal(animalName, destZoo, logistics);

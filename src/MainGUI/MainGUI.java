@@ -6,6 +6,9 @@ import javax.swing.*;
 import Bankmanagementsystem.BankingTaskListGUI;
 
 public class MainGUI {
+
+    public static String UserID = "10086";
+
     public static void main(String[] args) {
         // Create the main frame
         javax.swing.JFrame frame = new javax.swing.JFrame("Integrated Management System");
@@ -105,7 +108,7 @@ public class MainGUI {
 
         try {
 
-            BankingTaskListGUI.taskManager.createAccount("10086", 100.0, 10.0);
+            BankingTaskListGUI.taskManager.createAccount(UserID, 100.0, 10.0);
         } catch (Exception ex) {
             System.out.print("ERROR: " + ex.getMessage());
         }
