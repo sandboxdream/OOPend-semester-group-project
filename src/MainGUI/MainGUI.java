@@ -8,6 +8,7 @@ import Bankmanagementsystem.BankingTaskListGUI;
 public class MainGUI {
 
     public static String UserID = "10086";
+    public static boolean isStartFromMainGUI = false;
 
     public static void main(String[] args) {
         // Create the main frame
@@ -106,6 +107,7 @@ public class MainGUI {
         // Set the frame to be visible
         frame.setVisible(true);
 
+        isStartFromMainGUI = true;
         try {
 
             BankingTaskListGUI.taskManager.createAccount(UserID, 100.0, 10.0);
