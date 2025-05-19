@@ -1,13 +1,18 @@
 package RestaurantManagementSystem;
 
 import javax.swing.*;
+
+import Bankmanagementsystem.BankingTaskListGUI;
+import Bankmanagementsystem.BankingTaskManager;
+import MainGUI.MainGUI;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.awt.*;
 
-
 /**
- * RestaurantManagementSystemGUI - GUI implementation of the Restaurant Management System
+ * RestaurantManagementSystemGUI - GUI implementation of the Restaurant
+ * Management System
  */
 public class RestaurantManagementSystemGUI extends JFrame {
     // Main components
@@ -239,12 +244,14 @@ public class RestaurantManagementSystemGUI extends JFrame {
                     double price = Double.parseDouble(priceField.getText().trim());
 
                     if (name.isEmpty()) {
-                        JOptionPane.showMessageDialog(addDialog, "Please enter an ingredient name.", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(addDialog, "Please enter an ingredient name.", "Error",
+                                JOptionPane.ERROR_MESSAGE);
                         return;
                     }
 
                     if (ingredientInventory.containsKey(name)) {
-                        JOptionPane.showMessageDialog(addDialog, "An ingredient with this name already exists.", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(addDialog, "An ingredient with this name already exists.",
+                                "Error", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
 
@@ -253,7 +260,8 @@ public class RestaurantManagementSystemGUI extends JFrame {
                     textArea.append("Added ingredient: " + newIngredient + "\n");
                     addDialog.dispose();
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(addDialog, "Please enter a valid price.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(addDialog, "Please enter a valid price.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
                 }
             });
 
@@ -263,7 +271,7 @@ public class RestaurantManagementSystemGUI extends JFrame {
             addDialog.setVisible(true);
         });
 
-// View All Ingredients action
+        // View All Ingredients action
         viewButton.addActionListener(e -> {
             if (ingredientInventory.isEmpty()) {
                 textArea.setText("No ingredients in inventory.");
@@ -294,8 +302,7 @@ public class RestaurantManagementSystemGUI extends JFrame {
                     JOptionPane.QUESTION_MESSAGE,
                     null,
                     ingredientNames,
-                    ingredientNames[0]
-            );
+                    ingredientNames[0]);
 
             if (selectedName != null) {
                 ingredientInventory.remove(selectedName);
@@ -389,7 +396,8 @@ public class RestaurantManagementSystemGUI extends JFrame {
             createMealButton.addActionListener(event -> {
                 String mealName = nameField.getText().trim();
                 if (mealName.isEmpty()) {
-                    JOptionPane.showMessageDialog(createDialog, "Please enter a meal name.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(createDialog, "Please enter a meal name.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
@@ -401,7 +409,8 @@ public class RestaurantManagementSystemGUI extends JFrame {
                 }
 
                 if (selectedIngredientNames.isEmpty()) {
-                    JOptionPane.showMessageDialog(createDialog, "Please select at least one ingredient.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(createDialog, "Please select at least one ingredient.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
@@ -473,7 +482,7 @@ public class RestaurantManagementSystemGUI extends JFrame {
             }
 
             JScrollPane checkBoxScrollPane = new JScrollPane(selectPanel);
-            
+
             JPanel buttonPanel2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
             JButton addSelectedButton = new JButton("Add Selected");
             JButton cancelButton = new JButton("Cancel");
@@ -486,7 +495,7 @@ public class RestaurantManagementSystemGUI extends JFrame {
             addSelectedButton.addActionListener(event -> {
                 boolean anySelected = false;
                 StringBuilder resultText = new StringBuilder("Added to menu:\n");
-                
+
                 for (int i = 0; i < mealCheckBoxes.length; i++) {
                     if (mealCheckBoxes[i].isSelected()) {
                         anySelected = true;
@@ -494,12 +503,13 @@ public class RestaurantManagementSystemGUI extends JFrame {
                         resultText.append("- ").append(availableMeals.get(i).getName()).append("\n");
                     }
                 }
-                
+
                 if (!anySelected) {
-                    JOptionPane.showMessageDialog(addToMenuDialog, "Please select at least one meal.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(addToMenuDialog, "Please select at least one meal.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-                
+
                 textArea.setText(resultText.toString());
                 addToMenuDialog.dispose();
             });
@@ -583,8 +593,7 @@ public class RestaurantManagementSystemGUI extends JFrame {
                     JOptionPane.QUESTION_MESSAGE,
                     null,
                     mealNames,
-                    mealNames[0]
-            );
+                    mealNames[0]);
 
             if (selectedName != null) {
                 if (billing.removeMeal(selectedName)) {
@@ -601,7 +610,6 @@ public class RestaurantManagementSystemGUI extends JFrame {
         menuDialog.add(mainPanel);
         menuDialog.setVisible(true);
     }
-
 
     private ArrayList<Meal> getMenuItems() {
         ArrayList<Meal> menuItems = new ArrayList<>();
@@ -681,25 +689,25 @@ public class RestaurantManagementSystemGUI extends JFrame {
             // Create a panel for all meals
             JPanel mealsPanel = new JPanel();
             mealsPanel.setLayout(new BoxLayout(mealsPanel, BoxLayout.Y_AXIS));
-            
+
             // Map to store quantity fields for each meal
             HashMap<String, JTextField> quantityFields = new HashMap<>();
-            
+
             // Add each meal with its own quantity field
             for (Meal meal : menu) {
                 String mealName = meal.getName();
                 double mealPrice = meal.getPrice();
-                
+
                 JPanel mealRow = new JPanel(new FlowLayout(FlowLayout.LEFT));
-                
+
                 JLabel nameLabel = new JLabel(String.format("%s (￥%.2f)", mealName, mealPrice));
                 nameLabel.setPreferredSize(new Dimension(200, 25));
-                
+
                 JLabel qtyLabel = new JLabel("Qty:");
-                
+
                 JTextField quantityField = new JTextField("0", 3);
                 quantityFields.put(mealName, quantityField);
-                
+
                 JButton plusButton = new JButton("+1");
                 plusButton.addActionListener(event -> {
                     try {
@@ -709,62 +717,62 @@ public class RestaurantManagementSystemGUI extends JFrame {
                         quantityField.setText("1");
                     }
                 });
-                
+
                 mealRow.add(nameLabel);
                 mealRow.add(qtyLabel);
                 mealRow.add(quantityField);
                 mealRow.add(plusButton);
-                
+
                 mealsPanel.add(mealRow);
             }
-            
+
             // Add scroll support for many meals
             JScrollPane mealsScrollPane = new JScrollPane(mealsPanel);
             mealsScrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-            
+
             // Button panel
             JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
             JButton orderButton = new JButton("Add to Order");
             JButton cancelButton = new JButton("Cancel");
-            
+
             btnPanel.add(orderButton);
             btnPanel.add(cancelButton);
-            
+
             // Add components to dialog
             selectMealDialog.add(mealsScrollPane, BorderLayout.CENTER);
             selectMealDialog.add(btnPanel, BorderLayout.SOUTH);
-            
+
             // Order button action
             orderButton.addActionListener(event -> {
                 StringBuilder resultMessage = new StringBuilder("Added to order:\n");
                 boolean anyAdded = false;
-                
+
                 // Process each meal quantity
                 for (Meal meal : menu) {
                     String mealName = meal.getName();
                     JTextField qtyField = quantityFields.get(mealName);
-                    
+
                     try {
                         int quantity = Integer.parseInt(qtyField.getText());
-                        
+
                         if (quantity > 0) {
                             // Add the meal to order
                             billing.addMealToOrder(mealName, quantity);
-                            
+
                             // Add to result message
                             resultMessage.append("- ")
-                                     .append(mealName)
-                                     .append(" x ")
-                                     .append(quantity)
-                                     .append("\n");
-                            
+                                    .append(mealName)
+                                    .append(" x ")
+                                    .append(quantity)
+                                    .append("\n");
+
                             anyAdded = true;
                         }
                     } catch (NumberFormatException ex) {
                         // Ignore invalid inputs
                     }
                 }
-                
+
                 if (anyAdded) {
                     textArea.setText(resultMessage.toString());
                     selectMealDialog.dispose();
@@ -775,10 +783,10 @@ public class RestaurantManagementSystemGUI extends JFrame {
                             JOptionPane.INFORMATION_MESSAGE);
                 }
             });
-            
+
             // Cancel button action
             cancelButton.addActionListener(event -> selectMealDialog.dispose());
-            
+
             // Show dialog
             selectMealDialog.setVisible(true);
         });
@@ -789,10 +797,10 @@ public class RestaurantManagementSystemGUI extends JFrame {
             sb.append("======== ORDER: ========\n");
             ArrayList<Meal> menu = getMenuItems();
             boolean hasOrder = false;
-            
+
             // 获取订单中餐点的数量
             HashMap<String, Integer> mealQuantities = billing.getMealQuantities();
-            
+
             for (Meal meal : menu) {
                 String mealName = meal.getName();
                 Integer quantity = mealQuantities.get(mealName);
@@ -800,9 +808,9 @@ public class RestaurantManagementSystemGUI extends JFrame {
                     hasOrder = true;
                     double itemTotal = meal.getPrice() * quantity;
                     sb.append(mealName).append(" x ").append(quantity)
-                      .append("    Price: ").append(meal.getPrice())
-                      .append(" x ").append(quantity)
-                      .append(" = ").append(itemTotal).append("\n");
+                            .append("    Price: ").append(meal.getPrice())
+                            .append(" x ").append(quantity)
+                            .append(" = ").append(itemTotal).append("\n");
                 }
             }
 
@@ -815,7 +823,6 @@ public class RestaurantManagementSystemGUI extends JFrame {
 
             textArea.setText(sb.toString());
         });
-
 
         // Generate Bill action
         generateBillButton.addActionListener(e -> {
@@ -845,19 +852,28 @@ public class RestaurantManagementSystemGUI extends JFrame {
             generateButton.addActionListener(event -> {
                 String customerName = nameField.getText().trim();
                 if (customerName.isEmpty()) {
-                    JOptionPane.showMessageDialog(billDialog, "Please enter a customer name.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(billDialog, "Please enter a customer name.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
                 String bill = billing.generateBill(customerName);
+                if (MainGUI.isStartFromMainGUI == true) {
+
+                    try {
+                        BankingTaskListGUI.taskManager.deposit(MainGUI.UserID, billing.calculateBill());
+                    } catch (Exception ex) {
+                        System.out.println("ERROR" + ex.getMessage());
+                    }
+
+                }
                 textArea.setText(bill);
 
                 int response = JOptionPane.showConfirmDialog(
                         billDialog,
                         "Would you like to clear this order now?",
                         "Clear Order",
-                        JOptionPane.YES_NO_OPTION
-                );
+                        JOptionPane.YES_NO_OPTION);
 
                 if (response == JOptionPane.YES_OPTION) {
                     billing.clearOrder();
@@ -900,4 +916,3 @@ public class RestaurantManagementSystemGUI extends JFrame {
         SwingUtilities.invokeLater(() -> new RestaurantManagementSystemGUI());
     }
 }
-
