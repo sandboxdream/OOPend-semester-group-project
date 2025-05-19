@@ -4,9 +4,9 @@
  */
 package Bankmanagementsystem;
 
-
 /**
- * Represents a bank account with balance, interest rate, and transaction tracking
+ * Represents a bank account with balance, interest rate, and transaction
+ * tracking
  */
 public class BankAccount {
     private double balance;
@@ -23,32 +23,39 @@ public class BankAccount {
         this.monthlyServiceCharges = 0;
     }
 
-    public void deposit(double amount) {
+    public void deposit(double amount) throws Exception {
         if (amount > 0) {
             balance += amount;
             depositsCount++;
             System.out.println("Deposited RMB " + amount + ". New balance: RMB " + balance);
         } else {
             System.out.println("Invalid deposit amount.");
+            throw new Exception("Invalid deposit amount.");
         }
     }
 
-    public void withdraw(double amount) {
+    public void withdraw(double amount) throws Exception {
         if (!isActive()) {
             System.out.println("Account is inactive. Minimum balance required: RMB 25.00");
-            return;
+            throw new Exception("Account is inactive. Minimum balance required: RMB 25.00");
+            // return;
         }
-        
+
         if (amount > 0) {
             if (balance >= amount) {
                 balance -= amount;
                 withdrawalsCount++;
-                System.out.println("Withdrawn RMB " + amount + ". New balance: RMB " + balance);
+                System.out.println("Withdrawn RMB " + amount + ". New balance: RMB " +
+                        balance);
+                // throw new Exception("Withdrawn RMB " + amount + ". New balance: RMB " +
+                // balance);
             } else {
-                System.out.println("Insufficient funds for withdrawal.");
+                // System.out.println("Insufficient funds for withdrawal.");
+                throw new Exception("Insufficient funds for withdrawal.");
             }
         } else {
-            System.out.println("Invalid withdrawal amount.");
+            // System.out.println("Invalid withdrawal amount.");
+            throw new Exception("Invalid withdrawal amount.");
         }
     }
 

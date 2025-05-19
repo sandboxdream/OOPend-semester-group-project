@@ -31,7 +31,7 @@ public class RestaurantManagementSystem {
             System.out.print("Enter your choice: ");
 
             int choice = getIntInput(1, 5);
-            
+
             switch (choice) {
                 case 1 -> manageIngredients();
                 case 2 -> manageMeals();
@@ -55,7 +55,7 @@ public class RestaurantManagementSystem {
             System.out.print("Enter your choice: ");
 
             int choice = getIntInput(1, 4);
-            
+
             switch (choice) {
                 case 1 -> addIngredient();
                 case 2 -> displayIngredients();
@@ -102,7 +102,7 @@ public class RestaurantManagementSystem {
             System.out.print("Enter your choice: ");
 
             int choice = getIntInput(1, 4);
-            
+
             switch (choice) {
                 case 1 -> createMeal();
                 case 2 -> service.billing.displayMenu();
@@ -117,19 +117,20 @@ public class RestaurantManagementSystem {
     private static void createMeal() {
         System.out.print("Enter meal name: ");
         String mealName = scanner.nextLine();
-        
+
         ArrayList<String> ingredients = new ArrayList<>();
         while (true) {
             System.out.print("Add ingredient (type 'done' to finish): ");
             String ingName = scanner.nextLine();
-            if (ingName.equalsIgnoreCase("done")) break;
+            if (ingName.equalsIgnoreCase("done"))
+                break;
             if (!service.ingredients.containsKey(ingName)) {
                 System.out.println("Ingredient not found!");
                 continue;
             }
             ingredients.add(ingName);
         }
-        
+
         service.createMeal(mealName, ingredients);
         System.out.println("Meal created successfully!");
     }
@@ -146,7 +147,7 @@ public class RestaurantManagementSystem {
 
     private static void manageOrders() {
         HashMap<String, Integer> order = new HashMap<>();
-        
+
         while (true) {
             System.out.println("\n=== Order Management ===");
             System.out.println("1. Add Meal to Order");
@@ -157,7 +158,7 @@ public class RestaurantManagementSystem {
             System.out.print("Enter your choice: ");
 
             int choice = getIntInput(1, 5);
-            
+
             switch (choice) {
                 case 1:
                     addToOrder(order);
@@ -184,7 +185,7 @@ public class RestaurantManagementSystem {
         String mealName = scanner.nextLine();
         System.out.print("Enter quantity: ");
         int quantity = getIntInput(1, 100);
-        
+
         if (service.billing.findMealByName(mealName) != null) {
             order.put(mealName, order.getOrDefault(mealName, 0) + quantity);
             System.out.println("Added to order!");
@@ -198,7 +199,7 @@ public class RestaurantManagementSystem {
             System.out.println("Current order is empty");
             return;
         }
-        
+
         System.out.println("\n=== Current Order ===");
         order.forEach((meal, qty) -> {
             Meal m = service.billing.findMealByName(meal);
@@ -220,7 +221,8 @@ public class RestaurantManagementSystem {
         while (true) {
             try {
                 int input = Integer.parseInt(scanner.nextLine());
-                if (input >= min && input <= max) return input;
+                if (input >= min && input <= max)
+                    return input;
                 System.out.printf("Please enter a number between %d and %d: ", min, max);
             } catch (NumberFormatException e) {
                 System.out.print("Invalid input, please try again: ");

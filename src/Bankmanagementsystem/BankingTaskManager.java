@@ -4,7 +4,6 @@
  */
 package Bankmanagementsystem;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -30,23 +29,29 @@ public class BankingTaskManager {
         }
     }
 
-    public void deposit(String accountNumber, double amount) {
+    public void deposit(String accountNumber, double amount) throws Exception {
         BankAccount account = accounts.get(accountNumber);
         if (account != null) {
             account.deposit(amount);
             taskManager.addTask("Deposit RMB " + amount + " to account " + accountNumber);
         } else {
-            System.out.println("Account not found.");
+            // System.out.println("Account not found.");
+            throw new Exception("Account not found.");
+
+            // System.out.println("Account not found.");
         }
     }
 
-    public void withdraw(String accountNumber, double amount) {
+    public void withdraw(String accountNumber, double amount) throws Exception {
         BankAccount account = accounts.get(accountNumber);
         if (account != null) {
             account.withdraw(amount);
             taskManager.addTask("Withdraw RMB " + amount + " from account " + accountNumber + "*");
         } else {
-            System.out.println("Account not found.");
+            // throw new Exception("2222");
+            throw new Exception("Account not found.");
+
+            // System.out.println("Account not found.");
         }
     }
 
@@ -93,7 +98,7 @@ public class BankingTaskManager {
     public ArrayList<String> getLowPriorityTasks() {
         return taskManager.getLowPriorityTasks();
     }
-    
+
     public void viewTasks() {
         taskManager.displayTasks();
     }

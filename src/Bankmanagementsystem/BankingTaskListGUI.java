@@ -12,7 +12,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class BankingTaskListGUI {
-        // Main components
+    // Main components
     private JFrame frame;
     private BankingTaskManager taskManager;
 
@@ -39,7 +39,7 @@ public class BankingTaskListGUI {
     public BankingTaskListGUI() {
         // Initialize task manager
         taskManager = new BankingTaskManager();
-        
+
         // Initialize currency formatter
         currencyFormat = new DecimalFormat("RMB #,##0.00");
 
@@ -103,12 +103,12 @@ public class BankingTaskListGUI {
             taskManager.createAccount(accountNumber, initialBalance, interestRate);
 
             // Show success message
-            JOptionPane.showMessageDialog(frame, 
+            JOptionPane.showMessageDialog(frame,
                 "Account Created:\n" +
                 "Number: " + accountNumber + "\n" +
                 "Initial Balance: " + currencyFormat.format(initialBalance) + "\n" +
                 "Interest Rate: " + (interestRate * 100) + "%",
-                "Account Creation Successful", 
+                "Account Creation Successful",
                 JOptionPane.INFORMATION_MESSAGE);
 
             // Clear input fields
@@ -116,14 +116,14 @@ public class BankingTaskListGUI {
             initialBalanceField.setText("");
             interestRateField.setText("");
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(frame, 
+            JOptionPane.showMessageDialog(frame,
                 "Please enter valid numbers for balance and interest rate.",
-                "Invalid Input", 
+                "Invalid Input",
                 JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(frame, 
+            JOptionPane.showMessageDialog(frame,
                 "Error creating account: " + ex.getMessage(),
-                "Account Creation Error", 
+                "Account Creation Error",
                 JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -169,24 +169,24 @@ public class BankingTaskListGUI {
             }
 
             // Show success message
-            JOptionPane.showMessageDialog(frame, 
-                transactionType + " of " + currencyFormat.format(amount) + 
+            JOptionPane.showMessageDialog(frame,
+                transactionType + " of " + currencyFormat.format(amount) +
                 " to Account " + accountNumber + " successful!",
-                "Transaction Completed", 
+                "Transaction Completed",
                 JOptionPane.INFORMATION_MESSAGE);
 
             // Clear input fields
             transactionAccountField.setText("");
             transactionAmountField.setText("");
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(frame, 
+            JOptionPane.showMessageDialog(frame,
                 "Please enter a valid transaction amount.",
-                "Invalid Input", 
+                "Invalid Input",
                 JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(frame, 
+            JOptionPane.showMessageDialog(frame,
                 "Transaction failed: " + ex.getMessage(),
-                "Transaction Error", 
+                "Transaction Error",
                 JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -265,11 +265,11 @@ public class BankingTaskListGUI {
     private void updateTaskLists() {
         highPriorityModel.clear();
         lowPriorityModel.clear();
-        
+
         for (String task : taskManager.getHighPriorityTasks()) {
             highPriorityModel.addElement(task);
         }
-        
+
         for (String task : taskManager.getLowPriorityTasks()) {
             lowPriorityModel.addElement(task);
         }
