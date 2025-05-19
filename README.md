@@ -13,6 +13,23 @@ A modular Java application featuring four optimized object-oriented components w
 - Modules interact through unified GUI interfaces
 - Cross-module method invocation (e.g. Module C's GUI triggers Module B's interface)
 
+
+## Build
+
+make sure java,javac are in your PATH, or use the full path to the java and javac commands
+
+```bash
+git clone
+cd OOPend-semester-group-project
+javac -cp ./src src/MainGUI/MainGUI.java -d build/
+```
+
+## Run
+
+```bash
+java.exe -cp ./build MainGUI.MainGUI
+```
+
 ## ⚙️ Technical Specifications
 - ​**Language**: Java 18.0.2
 - ​**Testing**: JUnit 4.13.2
